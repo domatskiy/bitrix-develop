@@ -39,13 +39,19 @@ class BitrixDevelop
 	
 	public function sendAllEmailTo($email)
 	{
+	    if($email === '')
+	        return;
+
+	    if(!is_string($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
+	        throw new \Exception('not correct email');
+
         $EventManager = \Bitrix\Main\EventManager::getInstance();
-        $EventManager->addEventHandler('main', 'OnBeforeEventSend', function (&$arFields, &$arTemplate){
+        $EventManager->addEventHandler('main', 'OnBeforeEventSend', function (&$arFields, &$arTemplate) use ($email){
 
             if($this->develop_mode)
             {
-                $arTemplate['SUBJECT'] .= '[DEV for '.$arTemplate['EMAIL_TO'].']';
-                $arTemplate['EMAIL_TO'] = 'domackii@yandex.ru';
+                $arTemplate['SUBJECT'] .= '[DEV MODE for '.$arTemplate['EMAIL_TO'].']';
+                $arTemplate['EMAIL_TO'] = $email;
             }
 
         });
