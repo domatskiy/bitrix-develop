@@ -58,4 +58,63 @@ class BitrixDevelop
 
 	}
 
+    /**
+     * @param $data
+     * @param null $name
+     */
+	public function jsConsole($data, $name = null)
+    {
+        if(!$name)
+            $name = 'data'.rand(1000,1000000);
+
+        try{
+            $str = \CUtil::PhpToJSObject($data);
+        } catch (\Exception $e){
+            $str = '"'.$e->getMessage().', file '.$e->getFile().', line '.$e->getLine().'"';
+        }
+
+        echo '<script>';
+        echo 'var '.$name.' = '.$str.';';
+        echo 'console.log('.$name.')';
+        echo '</script>';
+    }
+
+    /**
+     * @param $data
+     * @param bool $hidden
+     */
+    public function var_dump($data, $hidden = true)
+    {
+        #if($this->develop_mode)
+        #    $hidden = true;
+
+        if($hidden)
+            echo '<!-- ';
+
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+
+        if($hidden)
+            echo ' -->';
+    }
+
+    /**
+     * @param $data
+     * @param bool $hidden
+     */
+    public function print_r($data, $hidden = true)
+    {
+        #if($this->develop_mode)
+        #    $hidden = true;
+
+        if($hidden)
+            echo '<!-- ';
+
+        echo '<pre>'.print_r($data, true).'</pre>';
+
+        if($hidden)
+            echo ' -->';
+    }
+
 }

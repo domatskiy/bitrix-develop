@@ -1,8 +1,8 @@
 {
     "name": "domatskiy/bitrix-develop",
     "type": "library",
-    "description": "",
-    "keywords": ["bitrix", "develop"],
+    "description": "the definition of developer mode to disable the counters, blocking send letters to users",
+    "keywords": ["bitrix", "dev mode", "develop"],
     "homepage": "http://domatskiy.ru",
     "license": "MIT",
     "authors": [
@@ -21,7 +21,7 @@
             "type":"package",
             "package":{
                 "name":"domatskiy/bitrix-develop",
-                "version":"1.0.1",
+                "version":"1.0.2",
                 "source":{
                     "type":"git",
                     "url":"https://github.com/domatskiy/bitrix-develop",
